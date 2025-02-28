@@ -1,12 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { ai } from '@zerostep/playwright'
-import { PenguinLandingPage } from '../pages/penguin-page';
+import { PenguinLandingPage } from '../../pages/penguin-page';
+import { tags } from '../../libraries/configs/tags';
 
 let penguinLandingPage: PenguinLandingPage;
-let baseUrl= 'https://www.antarctica.gov.au'
 test.describe('Penguin Landing Page', () => {
 
-test('User should be able to land on the correct page', async ({ page }) => {
+test('User should be able to land on the correct page' + tags({
+    tagsConfig: {
+        disableE2eTests: false,
+        disableAllTests: false,
+    },    
+}), async ({ page }) => {
 penguinLandingPage = new PenguinLandingPage(page);
 let aiArgs = { page, test }
 await page.goto('https://www.antarctica.gov.au/about-antarctica/animals/penguins/');
